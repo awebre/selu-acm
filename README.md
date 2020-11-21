@@ -20,8 +20,8 @@ Create a `.env.local` file (which will be ignored by Git) and set each variable 
 
 - `MONGODB_URI` - Your MongoDB connection string (default should be `"mongodb://localhost:27017"`).
 - `MONGODB_DB` - The name of the MongoDB database you want to use.
-- 'GOOGLE_ID' - The Google Client ID you configured for Google OAuth
-- 'GOOGLE_SECRET' - The Google Client Secret you configured for Google OAuth
+- `GOOGLE_ID` - The Google Client ID you configured for Google OAuth
+- `GOOGLE_SECRET` - The Google Client Secret you configured for Google OAuth
 
 ### Run Next.js in development mode
 
@@ -36,9 +36,9 @@ Your app should be up and running on [http://localhost:3000](http://localhost:30
 
 ### Data Seeding
 
+**NOTE: SEEDING FIRST DROPS THE DATABASE. THIS IS A DESTRUCTIVE ACTION THAT CANNOT BE REVERSED**
+
 In order to be able to test various portions of the app, you will first need to update or add to the existing seed data to include a `UserProfile` record linked to an email account that you can use with Google auth. This seed data can be found in `data/seed/userprofiles/userprofiles.js`.
 
 You can trigger seeding via the following command:
 `yarn seed`
-
-**NOTE: SEEDING FIRST DROPS THE DATABASE. THIS IS A DESTRUCTIVE ACTION THAT CANNOT BE REVERSED**
