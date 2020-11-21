@@ -6,12 +6,13 @@
     "dev-debug": "NODE_OPTIONS='--inspect' next dev",
     "build": "next build",
     "start": "next start",
-    "seed": "node data/seed/index.js"
+    "seed": "node seed.js"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.1",
     "axios": "^0.21.0",
     "classnames": "^2.2.6",
+    "dotenv": "^8.2.0",
     "mongo-seeding": "^3.5.0",
     "mongodb": "^3.6.0",
     "mongoose": "^5.10.15",

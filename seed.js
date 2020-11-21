@@ -1,8 +1,15 @@
 const path = require("path");
 const { Seeder } = require("mongo-seeding");
 
+//Hydates process.env with config explicitely because this is a mini node.js app
+//so we have to do that stuff ourselves
+require("dotenv").config({ path: ".env.local" });
+const { MONGODB_URI, MONGODB_DB } = process.env;
+console.log(`connection url: ${MONGODB_URI}`);
+console.log(`database: ${MONGODB_DB}`);
+
 const config = {
-  database: "mongodb://localhost:27017/selu-acm", //ideally this wouldn't be duplicated with the env file
+  database: `${MONGODB_URI}/${MONGODB_DB}`,
   dropDatabase: true,
 };
 const seeder = new Seeder(config);

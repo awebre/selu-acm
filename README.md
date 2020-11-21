@@ -1,77 +1,44 @@
-## Example app using MongoDB
-
-[MongoDB](https://www.mongodb.com/) is a general purpose, document-based, distributed database built for modern application developers and for the cloud era. This example will show you how to connect to and use MongoDB as your backend for your Next.js app.
-
-If you want to learn more about MongoDB, visit the following pages:
-
-- [MongoDB Atlas](https://mongodb.com/atlas)
-- [MongoDB Documentation](https://docs.mongodb.com/)
-
-## Deploy your own
-
-Once you have access to the environment variables you'll need, deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example):
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/import/git?c=1&s=https://github.com/vercel/next.js/tree/canary/examples/with-mongodb&env=MONGODB_URI,MONGODB_DB&envDescription=Required%20to%20connect%20the%20app%20with%20MongoDB)
-
-## How to use
-
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init) or [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/) to bootstrap the example:
-
-```bash
-npx create-next-app --example with-mongodb with-mongodb
-# or
-yarn create next-app --example with-mongodb with-mongodb
-```
-
 ## Configuration
 
 ### Set up a MongoDB database
 
-Set up a MongoDB database either locally or with [MongoDB Atlas for free](https://mongodb.com/atlas).
+[MongoDB](https://www.mongodb.com/) is a general purpose, document-based, distributed database. In order to contribute to this project, you will first need to have MongoDB installed.
+Instructions and documentation for installing and using MongoDb can be found at:
+
+- [MongoDB Install Guide](https://docs.mongodb.com/guides/server/install/)
+- [MongoDB Documentation](https://docs.mongodb.com/manual/)
+
+### Set up Google OAuth
+
+Follow [this tutorial](https://developers.google.com/identity/sign-in/web/sign-in) to set up a Google OAuth client. Note that the URI should be `http://localhost:3000` and the Authorized redirect URI should be `http://localhost:3000/api/auth/callback/google`.
+
+You will need your Client ID and Client Secret for the next step.
 
 ### Set up environment variables
 
-Copy the `env.local.example` file in this directory to `.env.local` (which will be ignored by Git):
+Create a `.env.local` file (which will be ignored by Git) and set each variable on `.env.local`:
 
-```bash
-cp .env.local.example .env.local
-```
-
-Set each variable on `.env.local`:
-
-- `MONGODB_URI` - Your MongoDB connection string. If you are using [MongoDB Atlas](https://mongodb.com/atlas) you can find this by clicking the "Connect" button for your cluster.
+- `MONGODB_URI` - Your MongoDB connection string (default should be `"mongodb://localhost:27017"`).
 - `MONGODB_DB` - The name of the MongoDB database you want to use.
+- 'GOOGLE_ID' - The Google Client ID you configured for Google OAuth
+- 'GOOGLE_SECRET' - The Google Client Secret you configured for Google OAuth
 
 ### Run Next.js in development mode
 
+**NOTE: THIS PROJECT USES `yarn` AS ITS PACKAGE MANAGER.**
+
 ```bash
-npm install
-npm run dev
-
-# or
-
 yarn install
 yarn dev
 ```
 
-Your app should be up and running on [http://localhost:3000](http://localhost:3000)! If it doesn't work, post on [GitHub discussions](https://github.com/zeit/next.js/discussions).
+Your app should be up and running on [http://localhost:3000](http://localhost:3000)!
 
-You will either see a message stating "You are connected to MongoDB" or "You are NOT connected to MongoDB". Ensure that you have provided the correct `MONGODB_URI` and `MONGODB_DB` environment variables.
+### Data Seeding
 
-When you are successfully connected, you can refer to the [MongoDB Node.js Driver docs](https://mongodb.github.io/node-mongodb-native/3.4/tutorials/collections/) for further instructions on how to query your database.
+In order to be able to test various portions of the app, you will first need to update or add to the existing seed data to include a `UserProfile` record linked to an email account that you can use with Google auth. This seed data can be found in `data/seed/userprofiles/userprofiles.js`.
 
-## Deploy on Vercel
+You can trigger seeding via the following command:
+`yarn seed`
 
-You can deploy this app to the cloud with [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
-
-#### Deploy Your Local Project
-
-To deploy your local project to Vercel, push it to GitHub/GitLab/Bitbucket and [import to Vercel](https://vercel.com/import/git?utm_source=github&utm_medium=readme&utm_campaign=next-example).
-
-**Important**: When you import your project on Vercel, make sure to click on **Environment Variables** and set them to match your `.env.local` file.
-
-#### Deploy from Our Template
-
-Alternatively, you can deploy using our template by clicking on the Deploy button below.
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/import/git?c=1&s=https://github.com/vercel/next.js/tree/canary/examples/with-mongodb&env=MONGODB_URI,MONGODB_DB&envDescription=Required%20to%20connect%20the%20app%20with%20MongoDB)
+**NOTE: SEEDING FIRST DROPS THE DATABASE. THIS IS A DESTRUCTIVE ACTION THAT CANNOT BE REVERSED**
