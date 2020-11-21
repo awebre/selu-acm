@@ -1,197 +1,85 @@
-import Head from 'next/head'
-import { connectToDatabase } from '../util/mongodb'
+import { useState } from "react";
+import dbConnect from "utils/mongoose";
+import { UserProfile } from "data/models";
+import { useSession } from "next-auth/client";
+import { useRouter } from "next/router";
+import { MainLayout, CardLink, Alert, Link } from "components";
 
-export default function Home({ isConnected }) {
+export default function Home({ membershipCount }) {
+  const [isMemberCountVisible, setMemberCountVisible] = useState(true);
+  const router = useRouter();
+  const [session] = useSession();
   return (
-    <div className="container">
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main>
-        <h1 className="title">
-          Welcome to <a href="https://nextjs.org">Next.js with MongoDB!</a>
-        </h1>
-
-        {isConnected ? (
-          <h2 className="subtitle">You are connected to MongoDB</h2>
-        ) : (
-          <h2 className="subtitle">
-            You are NOT connected to MongoDB. Check the <code>README.md</code>{' '}
-            for instructions.
-          </h2>
-        )}
-
-        <p className="description">
-          Get started by editing <code>pages/index.js</code>
-        </p>
-
-        <div className="grid">
-          <a href="https://nextjs.org/docs" className="card">
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className="card">
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className="card"
+    <div>
+      <MainLayout>
+        {session && (
+          <MainLayout.Banner
+            bubbleText="Welcome back!"
+            onClick={() => router.push("/admin")}
           >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="card"
-          >
-            <h3>Deploy &rarr;</h3>
             <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
+              You can view the ACM Officer Portal{" "}
+              <Link color="green" href="/admin" background="dark">
+                here.
+              </Link>
             </p>
-          </a>
+          </MainLayout.Banner>
+        )}
+        {isMemberCountVisible && (
+          <Alert
+            light
+            className="w-full"
+            color="yellow"
+            onClose={() => setMemberCountVisible(false)}
+          >
+            <h2 className="text-lg">
+              Become one of our <b>{membershipCount}</b> Active Members!{" "}
+              <Link color="yellow" href="contact">
+                <span>Contact Us</span>
+              </Link>
+            </h2>
+          </Alert>
+        )}
+        <div className="bg-green-600 h-full w-full pt-24 pb-24 shadow-inner">
+          <h1 className="text-7xl text-white text-center">SELU ACM</h1>
+          <p className="text-2xl text-white text-center mt-3">
+            Welcome to the official home of Southeastern's Association of
+            Computing Machinery!
+          </p>
         </div>
-      </main>
+        <MainLayout.Main>
+          <div className="bg-yellow-200 rounded-xl shadow-inner max-w-2xl">
+            <h1 className="text-2xl px-5 pt-5 pb-2 bg-yellow-100 rounded-t-xl">
+              About the ACM
+            </h1>
+            <p className="p-5">
+              The Association of Computing Machinery is a student-led,
+              member-driven organization that seeks to bring together students,
+              researches, and industry professionals within the fields of
+              Computer Science and Information Technology. The ACM provides
+              students with unique opportunities to network among themselves,
+              their professors, and other professionals, by hosting regular
+              meetings, presentations, and social events.
+            </p>
+          </div>
+          <div className="flex flex-wrap justify-center items-center max-w-screen-md mt-12">
+            <CardLink
+              href="/events"
+              headerText="Events"
+              bodyText="Check out the ACM's official calendar for upcoming events and talks."
+            />
 
-      <footer>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className="logo" />
-        </a>
-      </footer>
+            <CardLink
+              href="/contact"
+              headerText="Contact"
+              bodyText="Want to become a member, submit a talk, or ask a question? Contact us!"
+            />
+          </div>
+        </MainLayout.Main>
+        <MainLayout.Drawer />
+      </MainLayout>
 
       <style jsx>{`
-        .container {
-          min-height: 100vh;
-          padding: 0 0.5rem;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-        }
-
-        main {
-          padding: 5rem 0;
-          flex: 1;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-        }
-
-        footer {
-          width: 100%;
-          height: 100px;
-          border-top: 1px solid #eaeaea;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-
-        footer img {
-          margin-left: 0.5rem;
-        }
-
-        footer a {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-
-        a {
-          color: inherit;
-          text-decoration: none;
-        }
-
-        .title a {
-          color: #0070f3;
-          text-decoration: none;
-        }
-
-        .title a:hover,
-        .title a:focus,
-        .title a:active {
-          text-decoration: underline;
-        }
-
-        .title {
-          margin: 0;
-          line-height: 1.15;
-          font-size: 4rem;
-        }
-
-        .title,
-        .description {
-          text-align: center;
-        }
-
-        .subtitle {
-          font-size: 2rem;
-        }
-
-        .description {
-          line-height: 1.5;
-          font-size: 1.5rem;
-        }
-
-        code {
-          background: #fafafa;
-          border-radius: 5px;
-          padding: 0.75rem;
-          font-size: 1.1rem;
-          font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
-            DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
-        }
-
-        .grid {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-wrap: wrap;
-
-          max-width: 800px;
-          margin-top: 3rem;
-        }
-
-        .card {
-          margin: 1rem;
-          flex-basis: 45%;
-          padding: 1.5rem;
-          text-align: left;
-          color: inherit;
-          text-decoration: none;
-          border: 1px solid #eaeaea;
-          border-radius: 10px;
-          transition: color 0.15s ease, border-color 0.15s ease;
-        }
-
-        .card:hover,
-        .card:focus,
-        .card:active {
-          color: #0070f3;
-          border-color: #0070f3;
-        }
-
-        .card h3 {
-          margin: 0 0 1rem 0;
-          font-size: 1.5rem;
-        }
-
-        .card p {
-          margin: 0;
-          font-size: 1.25rem;
-          line-height: 1.5;
-        }
-
         .logo {
           height: 1em;
         }
@@ -219,15 +107,14 @@ export default function Home({ isConnected }) {
         }
       `}</style>
     </div>
-  )
+  );
 }
 
 export async function getServerSideProps(context) {
-  const { client } = await connectToDatabase()
+  await dbConnect();
 
-  const isConnected = await client.isConnected() // Returns true or false
-
+  const userProfiles = (await UserProfile.find({})).length;
   return {
-    props: { isConnected },
-  }
+    props: { membershipCount: userProfiles },
+  };
 }
