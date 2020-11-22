@@ -42,7 +42,7 @@ export default function Home({ membershipCount }) {
           </Alert>
         )}
         <div className="bg-green-600 h-full w-full pt-24 pb-24 shadow-inner">
-          <h1 className="text-7xl text-white text-center">SELU ACM</h1>
+          <h1 className="text-7xl text-white text-center">SLU ACM</h1>
           <p className="text-2xl text-white text-center mt-3">
             Welcome to the official home of Southeastern's Association of
             Computing Machinery!

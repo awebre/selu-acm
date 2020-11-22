@@ -50,7 +50,7 @@ function Banner({ bubbleText, onClick, children }) {
   );
 }
 
-function Drawer(props) {
+function Drawer() {
   const [isSigningOut, setSigningOut] = useState(false);
   const [isDrawerOpen, setDrawerOpen] = useState(false);
   const [session] = useSession();
@@ -63,6 +63,7 @@ function Drawer(props) {
     >
       <Button
         color="gray"
+        margin="m-0"
         className="absolute -top-10 right-3 rounded rounded-b-none bg-gray-100 shadow-inner"
         onClick={() => setDrawerOpen(!isDrawerOpen)}
       >
@@ -92,6 +93,7 @@ function Drawer(props) {
     <div className="sticky w-full bottom-0">
       <Button
         color="gray"
+        margin="m-0"
         className="absolute bottom-0 right-3 rounded rounded-b-none bg-gray-100 shadow-inner"
         onClick={() => setDrawerOpen(!isDrawerOpen)}
       >

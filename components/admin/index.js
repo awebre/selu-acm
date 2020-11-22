@@ -1,4 +1,4 @@
 import AdminLayout from "./AdminLayout";
-import OfficersCard from "./Officers";
+import OfficersCard from "./officers";
 
 export { AdminLayout, OfficersCard };

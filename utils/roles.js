@@ -5,5 +5,5 @@ const roles = {
 };
 
 const officerRoles = [roles.admin, roles.officer];
-
-export { roles as default, officerRoles };
+const allRoles = [roles.admin, roles.officer, roles.member];
+export { roles as default, officerRoles, allRoles };
