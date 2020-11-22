@@ -30,6 +30,7 @@ export default function Home({ membershipCount }) {
             light
             className="w-full"
             color="yellow"
+            rounded={false}
             onClose={() => setMemberCountVisible(false)}
           >
             <h2 className="text-lg">
@@ -113,6 +114,7 @@ export default function Home({ membershipCount }) {
 export async function getServerSideProps(context) {
   await dbConnect();
 
+  //TODO: switch this out with "active members" once that is a thing
   const userProfiles = (await UserProfile.find({})).length;
   return {
     props: { membershipCount: userProfiles },

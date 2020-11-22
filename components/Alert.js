@@ -3,6 +3,7 @@ import classNames from "classnames";
 export default function Alert({
   color = "blue",
   light = false,
+  rounded = true,
   className,
   onClose,
   children,
@@ -14,7 +15,8 @@ export default function Alert({
       role="alert"
       className={classNames(
         className,
-        `${textColor} px-6 py-4 border-0 rounded relative bg-${color}-${bgWeight} shadow-lg`
+        { rounded: rounded },
+        `${textColor} px-6 py-4 border-0 relative bg-${color}-${bgWeight} shadow-lg`
       )}
     >
       <span className="inline-block mr-5">{children}</span>

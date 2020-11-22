@@ -10,7 +10,7 @@ export default function Button({
     <button
       className={classNames(
         className,
-        `disabled:opacity-50 disabled:bg-${color}-500 bg-${color}-500 hover:bg-${color}-700 text-white font-bold py-2 px-4 shadow`
+        `disabled:opacity-50 disabled:bg-${color}-500 bg-${color}-500 hover:bg-${color}-700 text-white font-bold py-2 px-4 shadow m-2`
       )}
       {...props}
     >

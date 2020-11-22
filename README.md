@@ -8,11 +8,15 @@ Instructions and documentation for installing and using MongoDb can be found at:
 - [MongoDB Install Guide](https://docs.mongodb.com/guides/server/install/)
 - [MongoDB Documentation](https://docs.mongodb.com/manual/)
 
+This project uses [Mongoose](https://mongoosejs.com) for data modeling and validation.
+
 ### Set up Google OAuth
 
 Follow [this tutorial](https://developers.google.com/identity/sign-in/web/sign-in) to set up a Google OAuth client. Note that the URI should be `http://localhost:3000` and the Authorized redirect URI should be `http://localhost:3000/api/auth/callback/google`.
 
 You will need your Client ID and Client Secret for the next step.
+
+OAuth in this app is handled using [next-auth.js](https://next-auth.js.org) and its configuration can be found in `pages/api/auth/[...nextauth].js`.
 
 ### Set up environment variables
 
@@ -33,6 +37,10 @@ yarn dev
 ```
 
 Your app should be up and running on [http://localhost:3000](http://localhost:3000)!
+
+If you would like to debug (using VS Code), simply run the app using the following command:
+`yarn dev-debug`
+And then click the "Launch Program" from the VS Code Debug Menu to connect the debugger.
 
 ### Data Seeding
 

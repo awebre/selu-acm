@@ -63,7 +63,7 @@ function Drawer(props) {
     >
       <Button
         color="gray"
-        className="absolute -top-10 right-1 rounded rounded-b-none bg-gray-100 shadow-inner"
+        className="absolute -top-10 right-3 rounded rounded-b-none bg-gray-100 shadow-inner"
         onClick={() => setDrawerOpen(!isDrawerOpen)}
       >
         <i className="fas fa-chevron-down"></i>
@@ -92,7 +92,7 @@ function Drawer(props) {
     <div className="sticky w-full bottom-0">
       <Button
         color="gray"
-        className="absolute bottom-0 right-1 rounded rounded-b-none bg-gray-100 shadow-inner"
+        className="absolute bottom-0 right-3 rounded rounded-b-none bg-gray-100 shadow-inner"
         onClick={() => setDrawerOpen(!isDrawerOpen)}
       >
         <i className="fas fa-chevron-up"></i>

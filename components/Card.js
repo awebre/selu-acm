@@ -1,8 +1,12 @@
 import classNames from "classnames";
 
-function Card({ children }) {
+function Card({ children, className }) {
   return (
-    <div className="text-left border rounded-xl shadow-lg">{children}</div>
+    <div
+      className={classNames(className, "text-left border rounded-xl shadow-lg")}
+    >
+      {children}
+    </div>
   );
 }
 

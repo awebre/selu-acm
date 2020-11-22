@@ -5,5 +5,6 @@ import Alert from "./Alert";
 import Link from "./Link";
 import Button from "./Button";
 import Card from "./Card";
+import RedAlert from "./RedAlert";
 
-export { MainLayout, CardLink, Error, Alert, Link, Button, Card };
+export { MainLayout, CardLink, Error, Alert, Link, Button, Card, RedAlert };

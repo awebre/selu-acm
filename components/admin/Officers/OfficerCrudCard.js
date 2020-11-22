@@ -1,6 +1,7 @@
 import { useReducer } from "react";
 import { Button, Card } from "components";
 import OfficersTable from "./OfficersTable";
+import OfficerForm from "./OfficerForm";
 
 const actions = {
   ADD_NEW_OFFICER: "ADD_NEW_OFFICER",
@@ -18,9 +19,9 @@ const modes = {
 function reducer(state, action) {
   switch (action.type) {
     case actions.ADD_NEW_OFFICER:
-      return { ...state, officer: {}, mode: modes.create };
-    case actions.EDIT_OFFICER:
-      return { ...state, officer: action.officer, mode: modes.update };
+      return { ...state, officerId: "", mode: modes.create };
+    case actions.BEGIN_EDIT_OFFICER:
+      return { ...state, officerId: action.officerId, mode: modes.update };
     case actions.CANCEL:
       return { mode: modes.read };
     default:
@@ -28,38 +29,51 @@ function reducer(state, action) {
   }
 }
 
-export default function OfficerCrudCard({ officers, isReadOnly }) {
-  const [{ mode, officer }, dispatch] = useReducer(reducer, {
+export default function OfficerCrudCard({ isReadOnly }) {
+  const [{ mode, officerId }, dispatch] = useReducer(reducer, {
     mode: modes.read,
   });
   return (
     <Card>
-      <Card.Header>Officers</Card.Header>
+      <Card.Header>{getHeader(mode, isReadOnly)}</Card.Header>
       {mode === modes.read && (
-        <OfficersTable
-          officers={officers}
-          onEdit={beginEdit}
+        <OfficersTable onEdit={beginEdit} isReadOnly={isReadOnly} />
+      )}
+      {(mode === modes.update || mode === modes.create) && (
+        <OfficerForm
+          officerId={officerId}
+          onSuccess={() => dispatch({ type: actions.CANCEL })}
           isReadOnly={isReadOnly}
         />
       )}
-      {(mode === modes.update || mode === modes.create) && <form></form>}
       <Card.Footer className="p-4 flex flex-row-reverse">
         {mode === modes.read && (
-          <Button className="rounded" dispabled={isReadOnly}>
+          <Button
+            className="rounded"
+            onClick={() => dispatch({ type: actions.ADD_NEW_OFFICER })}
+            disabled={isReadOnly}
+          >
             Add Officer
           </Button>
         )}
         {(mode === modes.update || mode === modes.create) && (
           <>
+            {!isReadOnly && (
+              <Button
+                form="officer-form"
+                className="rounded"
+                type="submit"
+                disabled={isReadOnly}
+              >
+                Save Officer
+              </Button>
+            )}
             <Button
               className="rounded"
               color="gray"
               onClick={() => dispatch({ type: actions.CANCEL })}
             >
-              Cancel
-            </Button>
-            <Button className="rounded" disabled={isReadOnly}>
-              Save Officer
+              {isReadOnly ? "Done" : "Cancel"}
             </Button>
           </>
         )}
@@ -67,7 +81,20 @@ export default function OfficerCrudCard({ officers, isReadOnly }) {
     </Card>
   );
 
-  function beginEdit(officer) {
-    dispatch({ type: actions.EDIT_OFFICER, officer });
+  function getHeader(mode, isReadOnly) {
+    switch (mode) {
+      case modes.create:
+        return "Add Officer";
+      case modes.read:
+        return "Officers";
+      case modes.update:
+        return `${isReadOnly ? "View" : "Add"} Officer`;
+      case modes.delete:
+        return "Confirm Delete Officer";
+    }
+  }
+
+  function beginEdit(officerId) {
+    dispatch({ type: actions.BEGIN_EDIT_OFFICER, officerId: officerId });
   }
 }
