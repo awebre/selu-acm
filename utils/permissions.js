@@ -18,4 +18,14 @@ function canUpdateOfficers(user) {
   return false;
 }
 
-export { canReadOfficers, canUpdateOfficers };
+function canReadMembers(user) {
+  //This is duplicated in canReadOfficers, but it might change (or go away)
+  const role = user?.role;
+  if (role) {
+    return role === roles.admin || role === roles.officer;
+  }
+
+  return false;
+}
+
+export { canReadOfficers, canUpdateOfficers, canReadMembers };

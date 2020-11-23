@@ -18,9 +18,14 @@ function MainLayout({ children }) {
   );
 }
 
-function Main({ children }) {
+function Main({ className, children, justify = "center" }) {
   return (
-    <main className="px-20 py-5 flex flex-1 flex-col justify-center items-center">
+    <main
+      className={classNames(
+        className,
+        `px-20 py-5 flex flex-1 flex-col justify-${justify} items-center`
+      )}
+    >
       {children}
     </main>
   );

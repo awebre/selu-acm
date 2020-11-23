@@ -5,7 +5,7 @@ export default React.forwardRef(({ className, ...rest }, ref) => {
     <input
       className={classNames(
         className,
-        "border py-2 px-3 text-grey-darkest shadow-inner rounded disabled:bg-gray-300"
+        "border py-2 px-3 text-grey-darkest shadow-inner rounded disabled:bg-gray-300 max-w-lg"
       )}
       ref={ref}
       {...rest}

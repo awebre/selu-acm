@@ -5,7 +5,7 @@ export default function OfficersTable({ onEdit, isReadOnly }) {
   const { officers, isLoading, hasError, mutate, isValidating } = useOfficers();
   return (
     <>
-      {isValidating && (
+      {isValidating && !isLoading && (
         <Alert rounded={false}>
           <span className="animate-pulse">Updating Officers...</span>
         </Alert>
@@ -20,14 +20,14 @@ export default function OfficersTable({ onEdit, isReadOnly }) {
           <span className="animate-pulse">Loading Officers...</span>
         </Alert>
       )}
-      <table className="bg-white">
+      <table className="bg-white w-full">
         <thead>
           <tr>
             <th className="bg-green-100 border text-left px-8 py-4 rounded">
               Email
             </th>
             <th className="bg-green-100 border text-left px-8 py-4">Role</th>
-            <th className="bg-green-100 border text-left px-8 py-4">
+            <th className="bg-green-100 border text-left px-8 py-4 flex flex-1 justify-end items-end">
               <Button
                 color="gray"
                 className="rounded-full"
@@ -44,7 +44,7 @@ export default function OfficersTable({ onEdit, isReadOnly }) {
             <tr key={officer._id}>
               <td className="border px-8 py-4">{officer.email}</td>
               <td className="border px-8 py-4">{officer.role}</td>
-              <td className="border px-8 py-4">
+              <td className="border px-8 py-4 flex flex-1 justify-end items-end">
                 <Button
                   className="rounded-full"
                   onClick={() => onEdit(officer._id)}

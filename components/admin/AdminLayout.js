@@ -15,7 +15,9 @@ export default function AdminLayout({ children }) {
 
   return (
     <MainLayout>
-      <MainLayout.Main>{children}</MainLayout.Main>
+      <MainLayout.Main justify="start" className="w-full">
+        {children}
+      </MainLayout.Main>
       <MainLayout.Drawer />
     </MainLayout>
   );

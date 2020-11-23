@@ -6,5 +6,16 @@ import Link from "./Link";
 import Button from "./Button";
 import Card from "./Card";
 import RedAlert from "./RedAlert";
+import PillNav from "./PillNav";
 
-export { MainLayout, CardLink, Error, Alert, Link, Button, Card, RedAlert };
+export {
+  MainLayout,
+  CardLink,
+  Error,
+  Alert,
+  Link,
+  Button,
+  Card,
+  RedAlert,
+  PillNav,
+};

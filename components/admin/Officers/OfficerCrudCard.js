@@ -34,7 +34,7 @@ export default function OfficerCrudCard({ isReadOnly }) {
     mode: modes.read,
   });
   return (
-    <Card>
+    <Card className="w-9/12">
       <Card.Header>{getHeader(mode, isReadOnly)}</Card.Header>
       {mode === modes.read && (
         <OfficersTable onEdit={beginEdit} isReadOnly={isReadOnly} />
