@@ -7,6 +7,7 @@ import useOfficer from "data/api/useOfficer";
 
 export default function OfficerForm({ officerId, onSuccess, isReadOnly }) {
   const { officer, isLoading } = useOfficer(officerId);
+  const defaultValues = officer || { isActive: true };
 
   return (
     <>
@@ -16,10 +17,12 @@ export default function OfficerForm({ officerId, onSuccess, isReadOnly }) {
           <div className="col-span-3 bg-gray-100 p-5 mb-2 rouned animate-pulse"></div>
           <div className="col-span-2 bg-gray-300 p-4 rounded animate-pulse"></div>
           <div className="col-span-3 bg-gray-100 p-5 mb-2 rouned animate-pulse"></div>
+          <div className="col-span-2 bg-gray-300 p-4 rounded animage-pulse"></div>
+          <div className="col-span-1 bg-gray-100 p-5 rounded animate-pulse"></div>
         </div>
       ) : (
         <Form
-          defaultValues={officer}
+          defaultValues={defaultValues}
           onSuccess={onSuccess}
           isReadOnly={isReadOnly}
         />

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import dbConnect from "utils/mongoose";
-import { UserProfile } from "data/models";
+import { Member } from "data/models";
 import { useSession } from "next-auth/client";
 import { useRouter } from "next/router";
 import { MainLayout, CardLink, Alert, Link } from "components";
@@ -115,8 +115,15 @@ export async function getServerSideProps(context) {
   await dbConnect();
 
   //TODO: switch this out with "active members" once that is a thing
-  const userProfiles = (await UserProfile.find({})).length;
+  const now = new Date();
+  const members = (
+    await Member.find({
+      memberships: {
+        $elemMatch: { startDate: { $lte: now }, endDate: { $gte: now } },
+      },
+    })
+  ).length;
   return {
-    props: { membershipCount: userProfiles },
+    props: { membershipCount: members },
   };
 }
