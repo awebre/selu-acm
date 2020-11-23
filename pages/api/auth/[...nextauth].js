@@ -2,7 +2,7 @@ import { UserProfile } from "data/models";
 import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
 import dbConnect from "utils/mongoose";
-import roles from "utils/roles";
+import { officerRoles } from "utils/roles";
 const options = {
   // Configure one or more authentication providers
   providers: [
@@ -20,7 +20,7 @@ const options = {
       await dbConnect();
       const userRoles = await UserProfile.findOne({
         email: user.email,
-        role: roles.admin,
+        role: { $in: officerRoles },
       });
       if (!userRoles) {
         return Promise.reject("/errors/officerLogin");

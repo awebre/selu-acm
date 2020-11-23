@@ -6,7 +6,10 @@ async function getSessionUser(opt) {
   const { user } = (await getSession(opt)) || {};
   if (!user?.role && !!user?.email) {
     await dbConnect();
-    const profile = await UserProfile.findOne({ email: user.email });
+    const profile = await UserProfile.findOne({
+      email: user.email,
+      isActive: true,
+    });
     user.role = profile.role;
   }
 

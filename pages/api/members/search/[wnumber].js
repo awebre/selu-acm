@@ -8,7 +8,6 @@ async function get(req, res) {
   try {
     const wNumber = req.query.wnumber?.toUpperCase();
     const startsWith = new RegExp(`^${wNumber}`);
-    console.log(wNumber);
 
     await dbConnect();
     const members = await Member.find({ wNumber: startsWith });

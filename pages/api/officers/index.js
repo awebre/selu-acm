@@ -4,14 +4,14 @@ import { UserProfile } from "data/models";
 import { forMethod } from "utils/apiHelpers";
 import authorize from "utils/authorize";
 import { canReadOfficers, canUpdateOfficers } from "utils/permissions";
-import roles from "utils/roles";
+import { officerRoles } from "utils/roles";
 
 async function get(req, res) {
   try {
     await dbConnect();
     const officers = await UserProfile.find(
       {
-        role: { $in: [roles.admin, roles.officer] },
+        role: { $in: officerRoles },
         isActive: true,
       },
       { isActive: false }
