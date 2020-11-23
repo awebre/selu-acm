@@ -12,7 +12,7 @@ export default function MemberSearch({ search, onSearch, onEdit, onAdd }) {
       </FormGroup>
       {/* TODO: fancy loading skeleton */}
       {results && !isLoading && (
-        <ul className="border rounded">
+        <ul className="border rounded max-w-lg shadow">
           {results.map((r) => (
             <li
               key={r._id}

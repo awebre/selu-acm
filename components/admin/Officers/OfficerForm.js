@@ -69,11 +69,12 @@ function Form({ defaultValues, onSuccess, isReadOnly }) {
           options={officerRoles}
         />
       </FormGroup>
-      <FormGroup inline={true}>
+      <FormGroup inline={true} className="items-center">
         <Label className="mr-2" htmlFor="isActive">
           Active?
         </Label>
         <Input
+          className="mb-2"
           name="isActive"
           type="checkbox"
           ref={register()}

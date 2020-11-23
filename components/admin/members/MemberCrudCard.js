@@ -1,6 +1,8 @@
 import { useReducer } from "react";
-import { Card } from "components";
+import classNames from "classnames";
+import { Button, Card } from "components";
 import MemberSearch from "./MemberSearch";
+import MemberForm from "./MemberForm";
 
 const actions = {
   SEARCH: "SEARCH",
@@ -26,7 +28,7 @@ function reducer(state, action) {
 
 export default function MemberCrudCard() {
   const [{ search, memberId, addOrEdit }, dispatch] = useReducer(reducer, {
-    isAddOrUpdate: false,
+    addOrEdit: false,
   });
 
   return (
@@ -44,7 +46,16 @@ export default function MemberCrudCard() {
           onAdd={() => dispatch({ type: actions.ADD_MEMBER })}
         />
       )}
-      <Card.Footer className="h-16"></Card.Footer>
+      {addOrEdit && <MemberForm memberId={memberId} />}
+      <Card.Footer className="p-4 flex flex-row-reverse">
+        <Button
+          className={classNames({ hidden: !addOrEdit })}
+          color="gray"
+          onClick={() => dispatch({ type: actions.CANCEL })}
+        >
+          Cancel
+        </Button>
+      </Card.Footer>
     </Card>
   );
 }

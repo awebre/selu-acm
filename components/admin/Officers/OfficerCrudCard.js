@@ -88,7 +88,7 @@ export default function OfficerCrudCard({ isReadOnly }) {
       case modes.read:
         return "Officers";
       case modes.update:
-        return `${isReadOnly ? "View" : "Add"} Officer`;
+        return `${isReadOnly ? "View" : "Edit"} Officer`;
       case modes.delete:
         return "Confirm Delete Officer";
     }
