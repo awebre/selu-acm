@@ -4,22 +4,20 @@ import axios from "axios";
 import { FormGroup, Input, Select, Label } from "components/forms";
 import { officerRoles } from "utils/roles";
 import useOfficer from "data/api/useOfficer";
+import { SkeletonForm } from "components/forms";
 
 export default function OfficerForm({ officerId, onSuccess, isReadOnly }) {
-  const { officer, isLoading } = useOfficer(officerId);
+  const { officer, isLoading, isValidating } = useOfficer(officerId);
   const defaultValues = officer || { isActive: true };
 
   return (
     <>
-      {officerId && isLoading ? (
-        <div className="grid grid-cols-3 gap-2 p-10">
-          <div className="col-span-2 bg-gray-300 p-4 rounded animate-pulse"></div>
-          <div className="col-span-3 bg-gray-100 p-5 mb-2 rouned animate-pulse"></div>
-          <div className="col-span-2 bg-gray-300 p-4 rounded animate-pulse"></div>
-          <div className="col-span-3 bg-gray-100 p-5 mb-2 rouned animate-pulse"></div>
-          <div className="col-span-2 bg-gray-300 p-4 rounded animage-pulse"></div>
-          <div className="col-span-1 bg-gray-100 p-5 rounded animate-pulse"></div>
-        </div>
+      {officerId && (isLoading || isValidating) ? (
+        <SkeletonForm>
+          <SkeletonForm.FormGroup />
+          <SkeletonForm.FormGroup />
+          <SkeletonForm.FormGroup type="checkbox" />
+        </SkeletonForm>
       ) : (
         <Form
           defaultValues={defaultValues}
