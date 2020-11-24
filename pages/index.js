@@ -4,6 +4,7 @@ import { Member } from "data/models";
 import { useSession } from "next-auth/client";
 import { useRouter } from "next/router";
 import { MainLayout, CardLink, Alert, Link } from "components";
+import { BreadCrumb } from "components/navigation";
 
 export default function Home({ membershipCount }) {
   const [isMemberCountVisible, setMemberCountVisible] = useState(true);
@@ -48,6 +49,7 @@ export default function Home({ membershipCount }) {
             Computing Machinery!
           </p>
         </div>
+        <BreadCrumb />
         <MainLayout.Main>
           <div className="bg-yellow-200 rounded-xl shadow-inner max-w-2xl">
             <h1 className="text-2xl px-5 pt-5 pb-2 bg-yellow-100 rounded-t-xl">

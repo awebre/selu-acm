@@ -7,18 +7,29 @@ export default function BreadCrumb() {
   return (
     <nav className="bg-grey-light py-2 px-4 font-sans w-full bg-green-800 shadow">
       <ol className="list-reset flex text-white">
-        {subPaths.map((p, i) => (
+        {pathname === "/" ? (
           <>
-            <li key={i}>
-              <BreadCrumbLink subPath={p} fullPath={pathname} />
+            <li>
+              <span className="font-bold uppercase text-yellow-300">Home</span>
             </li>
-            {i !== subPaths.length - 1 && (
-              <li key={`${i}-/`}>
-                <span className="mx-2">/</span>
-              </li>
-            )}
+            <li>
+              <span className="mx-2">/</span>
+            </li>
           </>
-        ))}
+        ) : (
+          subPaths.map((p, i) => (
+            <>
+              <li key={i}>
+                <BreadCrumbLink subPath={p} fullPath={pathname} />
+              </li>
+              {i !== subPaths.length - 1 && (
+                <li key={`${i}-/`}>
+                  <span className="mx-2">/</span>
+                </li>
+              )}
+            </>
+          ))
+        )}
       </ol>
     </nav>
   );
