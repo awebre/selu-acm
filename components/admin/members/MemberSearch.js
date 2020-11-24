@@ -28,7 +28,7 @@ export default function MemberSearch({ search, onSearch, onEdit, onAdd }) {
           {results.length === 0 && (
             <li
               className="p-4 group hover:bg-gray-100 cursor-pointer"
-              onClick={onAdd}
+              onClick={() => onAdd(search)}
             >
               <p className="text-xs mb-1">
                 Looks like we couldn't find this member.

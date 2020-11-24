@@ -1,11 +1,10 @@
-import dbConnect from "utils/mongoose";
 import { UserProfile } from "data/models";
+import { withDb } from "utils/mongoose";
 import { forMethod } from "utils/apiHelpers";
 import authorize from "utils/authorize";
 import { canReadOfficers, canUpdateOfficers } from "utils/permissions";
 
 async function getOfficerById(officerId) {
-  await dbConnect();
   return await UserProfile.findById(officerId);
 }
 
@@ -41,7 +40,9 @@ async function put(req, res) {
   }
 }
 
-export default forMethod({
-  getHandler: authorize(get, canReadOfficers),
-  putHandler: authorize(put, canUpdateOfficers),
-});
+export default withDb(
+  forMethod({
+    getHandler: authorize(get, canReadOfficers),
+    putHandler: authorize(put, canUpdateOfficers),
+  })
+);

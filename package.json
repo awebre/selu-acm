@@ -12,6 +12,7 @@
     "@fortawesome/fontawesome-free": "^5.15.1",
     "axios": "^0.21.0",
     "classnames": "^2.2.6",
+    "dayjs": "^1.9.6",
     "dotenv": "^8.2.0",
     "mongo-seeding": "^3.5.0",
     "mongodb": "^3.6.0",

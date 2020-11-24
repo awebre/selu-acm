@@ -28,10 +28,11 @@ export default function Admin({ isReadOnly }) {
           Officers
         </PillNav.Pill>
       </PillNav>
-      {activeCard === cards.Officers && (
-        <OfficersCard isReadOnly={isReadOnly} />
-      )}
-      {activeCard === cards.Members && <MembersCard />}
+      <OfficersCard
+        isReadOnly={isReadOnly}
+        isVisible={activeCard === cards.Officers}
+      />
+      <MembersCard isVisible={activeCard === cards.Members} />
     </AdminLayout>
   );
 }

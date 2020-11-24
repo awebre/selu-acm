@@ -1,6 +1,6 @@
 import roles from "./roles";
 
-function canReadOfficers(user) {
+function isAdminOrOfficer(user) {
   const role = user?.role;
   if (role) {
     return role === roles.admin || role === roles.officer;
@@ -9,7 +9,7 @@ function canReadOfficers(user) {
   return false;
 }
 
-function canUpdateOfficers(user) {
+function isAdmin(user) {
   const role = user?.role;
   if (role) {
     return role == roles.admin;
@@ -18,14 +18,20 @@ function canUpdateOfficers(user) {
   return false;
 }
 
-function canReadMembers(user) {
-  //This is duplicated in canReadOfficers, but it might change (or go away)
-  const role = user?.role;
-  if (role) {
-    return role === roles.admin || role === roles.officer;
-  }
-
-  return false;
+function canReadOfficers(user) {
+  return isAdminOrOfficer(user);
 }
 
-export { canReadOfficers, canUpdateOfficers, canReadMembers };
+function canUpdateOfficers(user) {
+  return isAdmin(user);
+}
+
+function canReadMembers(user) {
+  return isAdminOrOfficer(user);
+}
+
+function canUpdateMembers(user) {
+  return isAdminOrOfficer(user);
+}
+
+export { canReadOfficers, canUpdateOfficers, canReadMembers, canUpdateMembers };

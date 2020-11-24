@@ -16,7 +16,12 @@ function reducer(state, action) {
     case actions.SEARCH:
       return { ...state, search: action.search, addOrEdit: false };
     case actions.ADD_MEMBER:
-      return { ...state, memberId: "", addOrEdit: true };
+      return {
+        ...state,
+        memberId: "",
+        wNumber: action.wNumber,
+        addOrEdit: true,
+      };
     case actions.EDIT_MEMBER:
       return { ...state, memberId: action.memberId, addOrEdit: true };
     case actions.CANCEL:
@@ -26,13 +31,16 @@ function reducer(state, action) {
   }
 }
 
-export default function MemberCrudCard() {
-  const [{ search, memberId, addOrEdit }, dispatch] = useReducer(reducer, {
-    addOrEdit: false,
-  });
+export default function MemberCrudCard({ isVisible }) {
+  const [{ search, memberId, wNumber, addOrEdit }, dispatch] = useReducer(
+    reducer,
+    {
+      addOrEdit: false,
+    }
+  );
 
   return (
-    <Card className="w-9/12">
+    <Card className={classNames({ hidden: !isVisible }, "w-9/12")}>
       <Card.Header>
         {addOrEdit
           ? `${!memberId ? "Add" : "Edit"} Membership`
@@ -43,11 +51,27 @@ export default function MemberCrudCard() {
           search={search}
           onSearch={(s) => dispatch({ type: actions.SEARCH, search: s })}
           onEdit={(id) => dispatch({ type: actions.EDIT_MEMBER, memberId: id })}
-          onAdd={() => dispatch({ type: actions.ADD_MEMBER })}
+          onAdd={(wNumber) =>
+            dispatch({ type: actions.ADD_MEMBER, wNumber: wNumber })
+          }
         />
       )}
-      {addOrEdit && <MemberForm memberId={memberId} />}
+      {addOrEdit && (
+        <MemberForm
+          memberId={memberId}
+          wNumber={wNumber}
+          onSuccess={() => dispatch({ type: actions.CANCEL })}
+        />
+      )}
       <Card.Footer className="p-4 flex flex-row-reverse">
+        <Button
+          form="member-form"
+          className="rounded"
+          type="submit"
+          className={classNames({ hidden: !addOrEdit })}
+        >
+          Save Member
+        </Button>
         <Button
           className={classNames({ hidden: !addOrEdit })}
           color="gray"

@@ -23,6 +23,7 @@ const MemberSchema = new Schema({
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
   memberships: [MembershipSchema],
+  nationalAcmNumber: { type: String },
 });
 
 const Member = mongoose.models.Member || mongoose.model("Member", MemberSchema);

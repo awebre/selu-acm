@@ -1,4 +1,4 @@
-import dbConnect from "utils/mongoose";
+import { withDb } from "utils/mongoose";
 import { Member } from "data/models";
 import { forMethod } from "utils/apiHelpers";
 import authorize from "utils/authorize";
@@ -9,14 +9,18 @@ async function get(req, res) {
     const wNumber = req.query.wnumber?.toUpperCase();
     const startsWith = new RegExp(`^${wNumber}`);
 
-    await dbConnect();
-    const members = await Member.find({ wNumber: startsWith });
-    console.log(members);
+    const now = new Date();
+    const members = await Member.find({ wNumber: startsWith })
+      .limit(10)
+      .sort("wNumber");
     const dtos = members.map((member) => ({
       _id: member._id,
       firstName: member.firstName,
       lastName: member.lastName,
       wNumber: member.wNumber,
+      hasActiveMembership: member.memberships.some(
+        (m) => m.startDate <= now && now <= m.endDate
+      ),
     }));
     res.json(dtos);
   } catch (error) {
@@ -25,6 +29,8 @@ async function get(req, res) {
   }
 }
 
-export default forMethod({
-  getHandler: authorize(get, canReadMembers),
-});
+export default withDb(
+  forMethod({
+    getHandler: authorize(get, canReadMembers),
+  })
+);

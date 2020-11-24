@@ -26,7 +26,7 @@ const forMethod = ({ getHandler, postHandler, putHandler, deleteHandler }) => (
     return deleteHandler(req, res);
   }
 
-  req.status(404).end();
+  res.status(404).end();
 };
 
 export { httpMethods, forMethod };

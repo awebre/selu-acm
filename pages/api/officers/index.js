@@ -1,14 +1,13 @@
 import { Types } from "mongoose";
-import dbConnect from "utils/mongoose";
 import { UserProfile } from "data/models";
 import { forMethod } from "utils/apiHelpers";
+import { withDb } from "utils/mongoose";
 import authorize from "utils/authorize";
 import { canReadOfficers, canUpdateOfficers } from "utils/permissions";
 import { officerRoles } from "utils/roles";
 
 async function get(req, res) {
   try {
-    await dbConnect();
     const officers = await UserProfile.find(
       {
         role: { $in: officerRoles },
@@ -32,7 +31,6 @@ async function get(req, res) {
 
 async function post(req, res) {
   try {
-    await dbConnect();
     await UserProfile.create({
       ...req.body,
       _id: Types.ObjectId().toHexString(),
@@ -44,7 +42,9 @@ async function post(req, res) {
   }
 }
 
-export default forMethod({
-  getHandler: authorize(get, canReadOfficers),
-  postHandler: authorize(post, canUpdateOfficers),
-});
+export default withDb(
+  forMethod({
+    getHandler: authorize(get, canReadOfficers),
+    postHandler: authorize(post, canUpdateOfficers),
+  })
+);

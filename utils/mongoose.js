@@ -35,4 +35,15 @@ async function dbConnect() {
   connection.isConnected = db.connections[0].readyState;
 }
 
-export default dbConnect;
+const withDb = (handler) => async (req, res) => {
+  try {
+    await dbConnect();
+  } catch (error) {
+    console.log(error);
+    res.status(400).send("Error connecting to database.");
+  }
+
+  return handler(req, res);
+};
+
+export { dbConnect as default, withDb };

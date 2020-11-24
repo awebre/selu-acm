@@ -20,12 +20,12 @@ module.exports = [
     lastName: "Webre",
     memberships: [
       {
-        id: getObjectId("membership1"),
+        _id: getObjectId("membership1"),
         startDate: startDate2,
         endDate: endDate2,
       },
       {
-        id: getObjectId("membership2"),
+        _id: getObjectId("membership2"),
         startDate: startDate,
         endDate: endDate,
       },
@@ -38,7 +38,7 @@ module.exports = [
     lasName: "Expired",
     memberships: [
       {
-        id: getObjectId("expiredMembership"),
+        _id: getObjectId("expiredMembership"),
         startDate: startDate2,
         endDate: endDate2,
       },

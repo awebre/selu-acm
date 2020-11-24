@@ -1,4 +1,5 @@
 import { useReducer } from "react";
+import classNames from "classnames";
 import { Button, Card } from "components";
 import OfficersTable from "./OfficersTable";
 import OfficerForm from "./OfficerForm";
@@ -29,12 +30,12 @@ function reducer(state, action) {
   }
 }
 
-export default function OfficerCrudCard({ isReadOnly }) {
+export default function OfficerCrudCard({ isReadOnly, isVisible }) {
   const [{ mode, officerId }, dispatch] = useReducer(reducer, {
     mode: modes.read,
   });
   return (
-    <Card className="w-9/12">
+    <Card className={classNames({ hidden: !isVisible }, "w-9/12")}>
       <Card.Header>{getHeader(mode, isReadOnly)}</Card.Header>
       {mode === modes.read && (
         <OfficersTable onEdit={beginEdit} isReadOnly={isReadOnly} />
