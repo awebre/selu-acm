@@ -16,12 +16,23 @@ export default function MemberSearch({ search, onSearch, onEdit, onAdd }) {
           {results.map((r) => (
             <li
               key={r._id}
-              className="p-4 group hover:bg-gray-100 cursor-pointer"
+              className="p-4 group hover:bg-gray-100 cursor-pointer flex justify-between"
               onClick={() => onEdit(r._id)}
             >
-              <div className="font-bold group-hover:underline">{r.wNumber}</div>
               <div>
-                {r.firstName} {r.lastName}
+                <div className="font-bold group-hover:underline">
+                  {r.wNumber}
+                </div>
+                <div>
+                  {r.firstName} {r.lastName}
+                </div>
+              </div>
+              <div>
+                {r.hasActiveMembership ? (
+                  <i className="fas fa-check text-green-500"></i>
+                ) : (
+                  <i className="fas fa-clock text-yellow-300"></i>
+                )}
               </div>
             </li>
           ))}

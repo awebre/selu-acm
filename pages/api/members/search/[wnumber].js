@@ -18,9 +18,7 @@ async function get(req, res) {
       firstName: member.firstName,
       lastName: member.lastName,
       wNumber: member.wNumber,
-      hasActiveMembership: member.memberships.some(
-        (m) => m.startDate <= now && now <= m.endDate
-      ),
+      hasActiveMembership: member.hasActiveMembership(),
     }));
     res.json(dtos);
   } catch (error) {

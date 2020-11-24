@@ -5,10 +5,18 @@ function fetcher(url) {
   return axios.get(url).then((res) => res.data);
 }
 
-function useMember(memberId) {
+function useMember({
+  memberId,
+  revalidateOnFocus = false,
+  revalidateOnReconnect = false,
+}) {
   const { data, error, ...rest } = useSWR(
     memberId ? `api/members/${memberId}` : null,
-    fetcher
+    fetcher,
+    {
+      revalidateOnFocus,
+      revalidateOnReconnect,
+    }
   );
   return {
     member: data,

@@ -7,6 +7,7 @@ import { canUpdateMembers } from "utils/permissions";
 
 async function post(req, res) {
   try {
+    //TODO: serverside validation to ensure that two members with the same wnumber can't exist
     await Member.create({
       ...req.body,
       _id: Types.ObjectId().toHexString(),

@@ -5,10 +5,15 @@ function fetcher(url) {
   return axios.get(url).then((res) => res.data);
 }
 
-function useOfficer(officerId) {
+function useOfficer({
+  officerId,
+  revalidateOnFocus = false,
+  revalidateOnReconnect = false,
+}) {
   const { data, error, ...rest } = useSWR(
     officerId ? `api/officers/${officerId}` : null,
-    fetcher
+    fetcher,
+    { revalidateOnFocus, revalidateOnReconnect }
   );
   return {
     officer: data,

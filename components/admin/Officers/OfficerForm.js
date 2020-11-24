@@ -7,7 +7,7 @@ import useOfficer from "data/api/useOfficer";
 import { SkeletonForm } from "components/forms";
 
 export default function OfficerForm({ officerId, onSuccess, isReadOnly }) {
-  const { officer, isLoading, isValidating } = useOfficer(officerId);
+  const { officer, isLoading, isValidating } = useOfficer({ officerId });
   const defaultValues = officer || { isActive: true };
 
   return (

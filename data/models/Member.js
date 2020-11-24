@@ -26,5 +26,10 @@ const MemberSchema = new Schema({
   nationalAcmNumber: { type: String },
 });
 
+MemberSchema.methods.hasActiveMembership = function () {
+  const now = new Date();
+  return this.memberships.some((m) => m.startDate <= now && now <= m.endDate);
+};
+
 const Member = mongoose.models.Member || mongoose.model("Member", MemberSchema);
 export default Member;
