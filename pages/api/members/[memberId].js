@@ -35,6 +35,7 @@ async function get(req, res) {
 
 async function put(req, res) {
   try {
+    //TODO: serverside validation to ensure that two members with the same wnumber can't exist
     const memberId = req.query.memberId;
     const member = await Member.findById(memberId);
 

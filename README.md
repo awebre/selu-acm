@@ -26,6 +26,8 @@ Create a `.env.local` file (which will be ignored by Git) and set each variable 
 - `MONGODB_DB` - The name of the MongoDB database you want to use.
 - `GOOGLE_ID` - The Google Client ID you configured for Google OAuth
 - `GOOGLE_SECRET` - The Google Client Secret you configured for Google OAuth
+- `GOOGLE_CALENDAR_URL` - The public url to a Google Calendar you own (Google Calendar -> Settings -> "Some Calendar" -> Integrate Calendar)
+- `CONTACT_EMAIL` - The email that should appear on the Contact Us page (may be used in the future to send emails from a contact form)
 
 ### Run Next.js in development mode
 

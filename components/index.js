@@ -7,6 +7,7 @@ import Button from "./Button";
 import Card from "./Card";
 import RedAlert from "./RedAlert";
 import PillNav from "./PillNav";
+import ContentPage from "./ContentPage";
 
 export {
   MainLayout,
@@ -18,4 +19,5 @@ export {
   Card,
   RedAlert,
   PillNav,
+  ContentPage,
 };

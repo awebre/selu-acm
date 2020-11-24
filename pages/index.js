@@ -114,7 +114,6 @@ export default function Home({ membershipCount }) {
 export async function getServerSideProps(context) {
   await dbConnect();
 
-  //TODO: switch this out with "active members" once that is a thing
   const now = new Date();
   const members = (
     await Member.find({
