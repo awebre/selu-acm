@@ -59,102 +59,79 @@ function Form({ defaultValues, onSuccess }) {
         name="wNumber"
         label="W Number"
         errors={errors}
-      >
-        <Input
-          type="text"
-          name="wNumber"
-          ref={register({
-            required: true,
-            pattern: {
-              value: /[W][0-9]+$/,
-              message:
-                "WNumber should start with a W and otherwise contain only numbers.",
-            },
-          })}
-        />
-      </FormGroup>
-      <FormGroup inline={true} className="mb-4">
+        inputType="text"
+        ref={register({
+          required: true,
+          pattern: {
+            value: /[W][0-9]+$/,
+            message:
+              "WNumber should start with a W and otherwise contain only numbers.",
+          },
+        })}
+      />
+      <div className="mb-4 flex flex-row items-between">
         <FormGroup
           className="w-full mr-2"
+          inputType="text"
           name="firstName"
+          ref={register({ required: true })}
           label="First Name"
           errors={errors}
-        >
-          <Input
-            type="text"
-            name="firstName"
-            ref={register({ required: true })}
-          />
-        </FormGroup>
+        />
         <FormGroup
           className="w-full ml-2"
+          inputType="text"
           name="lastName"
+          ref={register({ required: true })}
           label="Last Name"
           errors={errors}
-        >
-          <Input
-            type="text"
-            name="lastName"
-            ref={register({ required: true })}
-          />
-        </FormGroup>
-      </FormGroup>
+        />
+      </div>
       <FormGroup
         className="mb-4"
+        inputType="text"
         name="nationalAcmNumber"
         label="National ACM Membership #"
+        ref={register}
         errors={errors}
         helpText={
           "Only required if you are the member of the National ACM Chapter."
         }
-      >
-        <Input type="text" name="nationalAcmNumber" ref={register} />
-      </FormGroup>
+      />
       {!defaultValues.hasActiveMembership && (
         <>
-          <FormGroup
-            className="mb-2"
-            helpText="I allow Southeastern Louisiana University ACM Student Chapter to access the information I provided in this form, as well as my Southeastern Louisiana University email address, my academic majors and minors, my degree and classification."
-          >
+          <div className="mb-2 flex flex-row">
             <FormGroup
               inline={true}
-              className="items-center"
+              inputType="checkbox"
               name="licenseAgreement"
+              ref={register}
               label="License Agreement"
-            >
-              <Input
-                type="checkbox"
-                name="licenseAgreement"
-                className="mb-2"
-                ref={register}
-              />
-            </FormGroup>
-          </FormGroup>
+            ></FormGroup>
+          </div>
+          <p className="text-xs">
+            I allow Southeastern Louisiana University ACM Student Chapter to
+            access the information I provided in this form, as well as my
+            Southeastern Louisiana University email address, my academic majors
+            and minors, my degree and classification.
+          </p>
           {watchLicenseAgreement && (
-            <FormGroup>
-              <Label>Membership Start Date</Label>
-              <Input
-                type="date"
-                name="startDate"
-                defaultValue={dayjs().format("YYYY-MM-DD")}
-                ref={register({
-                  validate: (val) => {
-                    const { licenseAgreement } = getValues();
-                    const isValid = !licenseAgreement || !!val;
-                    return (
-                      isValid ||
-                      "Start Date is required when submiting a new membership."
-                    );
-                  },
-                })}
-              />
-              {/*TODO: combine label, input, and error message into a single API?*/}
-              <ErrorMessage
-                name="startDate"
-                label="Membership Start Date"
-                errors={errors}
-              />
-            </FormGroup>
+            <FormGroup
+              label="Membership Start Date"
+              inputType="date"
+              name="startDate"
+              defaultValue={dayjs().format("YYYY-MM-DD")}
+              ref={register({
+                validate: (val) => {
+                  const { licenseAgreement } = getValues();
+                  const isValid = !licenseAgreement || !!val;
+                  return (
+                    isValid ||
+                    "Start Date is required when submiting a new membership."
+                  );
+                },
+              })}
+            />
           )}
         </>
       )}

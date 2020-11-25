@@ -30,7 +30,7 @@ export default function OfficerForm({ officerId, onSuccess, isReadOnly }) {
 }
 
 function Form({ defaultValues, onSuccess, isReadOnly }) {
-  const { register, handleSubmit, errors } = useForm({ defaultValues });
+  const { register, handleSubmit, errors, watch } = useForm({ defaultValues });
   async function onSubmit(data) {
     if (!data._id) {
       //create
@@ -45,6 +45,8 @@ function Form({ defaultValues, onSuccess, isReadOnly }) {
       }
     }
   }
+
+  console.log(watch("email"));
   return (
     <form id="officer-form" className="p-10" onSubmit={handleSubmit(onSubmit)}>
       {/* register your input into the hook by invoking the "register" function */}
@@ -53,32 +55,30 @@ function Form({ defaultValues, onSuccess, isReadOnly }) {
         className="mb-4"
         name="email"
         label="Email Address"
+        inputType="email"
+        disabled={isReadOnly}
+        ref={register({ required: true })}
         errors={errors}
-      >
-        <Input
-          name="email"
-          type="email"
-          disabled={isReadOnly}
-          ref={register({ required: true })}
-        />
-      </FormGroup>
-      <FormGroup className="mb-4" name="role" label="Role" errors={errors}>
-        <Select
-          name="role"
-          disabled={isReadOnly}
-          ref={register({ required: true })}
-          options={officerRoles}
-        />
-      </FormGroup>
-      <FormGroup inline={true} name="isActive" label="Active?" errors={errors}>
-        <Input
-          className="mb-2"
-          name="isActive"
-          type="checkbox"
-          ref={register()}
-          disabled={isReadOnly}
-        />
-      </FormGroup>
+      />
+      <FormGroup
+        className="mb-4"
+        name="role"
+        label="Role"
+        inputType="select"
+        errors={errors}
+        disabled={isReadOnly}
+        ref={register({ required: true })}
+        options={officerRoles}
+      />
+      <FormGroup
+        inline={true}
+        name="isActive"
+        label="Active?"
+        errors={errors}
+        inputType="checkbox"
+        ref={register()}
+        disabled={isReadOnly}
+      />
     </form>
   );
 }
