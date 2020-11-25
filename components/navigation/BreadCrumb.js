@@ -18,16 +18,10 @@ export default function BreadCrumb() {
           </>
         ) : (
           subPaths.map((p, i) => (
-            <>
-              <li key={i}>
-                <BreadCrumbLink subPath={p} fullPath={pathname} />
-              </li>
-              {i !== subPaths.length - 1 && (
-                <li key={`${i}-/`}>
-                  <span className="mx-2">/</span>
-                </li>
-              )}
-            </>
+            <li key={i}>
+              <BreadCrumbLink key={i} subPath={p} fullPath={pathname} />
+              {i !== subPaths.length - 1 && <span className="mx-2">/</span>}
+            </li>
           ))
         )}
       </ol>
@@ -35,7 +29,7 @@ export default function BreadCrumb() {
   );
 }
 
-function BreadCrumbLink({ subPath, fullPath }) {
+function BreadCrumbLink({ subPath, fullPath, ...props }) {
   const href =
     subPath === ""
       ? "/"
@@ -46,6 +40,7 @@ function BreadCrumbLink({ subPath, fullPath }) {
       color="yellow"
       background="dark"
       className="font-bold uppercase"
+      {...props}
     >
       {subPath === "" ? "Home" : subPath}
     </Link>

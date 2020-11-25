@@ -1,5 +1,4 @@
-export default function ErrorMessage({ name, label, errors }) {
-  const { type, message } = errors[name] || {};
+export default function ErrorMessage({ label, type, message }) {
   if (!!message) {
     return <Error>{message}</Error>;
   }

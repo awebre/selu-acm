@@ -8,7 +8,6 @@ export default function Events({ calendarUrl }) {
         style={{ border: "solid 1px #777" }}
         width="800"
         height="600"
-        frameborder="0"
         scrolling="no"
       ></iframe>
     </ContentPage>

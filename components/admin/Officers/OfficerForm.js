@@ -49,8 +49,12 @@ function Form({ defaultValues, onSuccess, isReadOnly }) {
     <form id="officer-form" className="p-10" onSubmit={handleSubmit(onSubmit)}>
       {/* register your input into the hook by invoking the "register" function */}
       <input type="hidden" name="_id" ref={register()}></input>
-      <FormGroup className="mb-4">
-        <Label htmlFor="email">Email Address</Label>
+      <FormGroup
+        className="mb-4"
+        name="email"
+        label="Email Address"
+        errors={errors}
+      >
         <Input
           name="email"
           type="email"
@@ -58,8 +62,7 @@ function Form({ defaultValues, onSuccess, isReadOnly }) {
           ref={register({ required: true })}
         />
       </FormGroup>
-      <FormGroup className="mb-4">
-        <Label htmlFor="role">Role</Label>
+      <FormGroup className="mb-4" name="role" label="Role" errors={errors}>
         <Select
           name="role"
           disabled={isReadOnly}
@@ -67,10 +70,7 @@ function Form({ defaultValues, onSuccess, isReadOnly }) {
           options={officerRoles}
         />
       </FormGroup>
-      <FormGroup inline={true} className="items-center">
-        <Label className="mr-2" htmlFor="isActive">
-          Active?
-        </Label>
+      <FormGroup inline={true} name="isActive" label="Active?" errors={errors}>
         <Input
           className="mb-2"
           name="isActive"

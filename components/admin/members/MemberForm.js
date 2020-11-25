@@ -33,6 +33,7 @@ function Form({ defaultValues, onSuccess }) {
   const { register, handleSubmit, watch, errors, getValues } = useForm({
     defaultValues,
   });
+  console.log(errors);
   async function onSubmit(data) {
     if (!data._id) {
       //create
@@ -53,21 +54,44 @@ function Form({ defaultValues, onSuccess }) {
   return (
     <form className="p-10" id="member-form" onSubmit={handleSubmit(onSubmit)}>
       <input type="hidden" name="_id" ref={register}></input>
-      <FormGroup className="mb-4">
-        <Label>W#</Label>
-        <Input type="text" name="wNumber" ref={register({ required: true })} />
+      <FormGroup
+        className="mb-4"
+        name="wNumber"
+        label="W Number"
+        errors={errors}
+      >
+        <Input
+          type="text"
+          name="wNumber"
+          ref={register({
+            required: true,
+            pattern: {
+              value: /[W][0-9]+$/,
+              message:
+                "WNumber should start with a W and otherwise contain only numbers.",
+            },
+          })}
+        />
       </FormGroup>
       <FormGroup inline={true} className="mb-4">
-        <FormGroup className="w-full mr-2">
-          <Label>First Name</Label>
+        <FormGroup
+          className="w-full mr-2"
+          name="firstName"
+          label="First Name"
+          errors={errors}
+        >
           <Input
             type="text"
             name="firstName"
             ref={register({ required: true })}
           />
         </FormGroup>
-        <FormGroup className="w-full ml-2">
-          <Label>Last Name</Label>
+        <FormGroup
+          className="w-full ml-2"
+          name="lastName"
+          label="Last Name"
+          errors={errors}
+        >
           <Input
             type="text"
             name="lastName"
@@ -75,18 +99,29 @@ function Form({ defaultValues, onSuccess }) {
           />
         </FormGroup>
       </FormGroup>
-      <FormGroup className="mb-4">
-        <Label>National ACM Membership #</Label>
+      <FormGroup
+        className="mb-4"
+        name="nationalAcmNumber"
+        label="National ACM Membership #"
+        errors={errors}
+        helpText={
+          "Only required if you are the member of the National ACM Chapter."
+        }
+      >
         <Input type="text" name="nationalAcmNumber" ref={register} />
-        <span className="text-xs">
-          Only required if you are the member of the National ACM Chapter.
-        </span>
       </FormGroup>
       {!defaultValues.hasActiveMembership && (
         <>
-          <FormGroup>
-            <FormGroup inline={true} className="items-center mb-2">
-              <Label className="mr-2">License Agreement</Label>
+          <FormGroup
+            className="mb-2"
+            helpText="I allow Southeastern Louisiana University ACM Student Chapter to access the information I provided in this form, as well as my Southeastern Louisiana University email address, my academic majors and minors, my degree and classification."
+          >
+            <FormGroup
+              inline={true}
+              className="items-center"
+              name="licenseAgreement"
+              label="License Agreement"
+            >
               <Input
                 type="checkbox"
                 name="licenseAgreement"
@@ -94,12 +129,6 @@ function Form({ defaultValues, onSuccess }) {
                 ref={register}
               />
             </FormGroup>
-            <span className="mb-2">
-              I allow Southeastern Louisiana University ACM Student Chapter to
-              access the information I provided in this form, as well as my
-              Southeastern Louisiana University email address, my academic
-              majors and minors, my degree and classification.
-            </span>
           </FormGroup>
           {watchLicenseAgreement && (
             <FormGroup>
