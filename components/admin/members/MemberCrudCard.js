@@ -63,20 +63,15 @@ export default function MemberCrudCard({ isVisible }) {
           onSuccess={() => dispatch({ type: actions.CANCEL })}
         />
       )}
-      <Card.Footer className="p-4 flex flex-row-reverse">
-        <Button
-          form="member-form"
-          className="rounded"
-          type="submit"
-          className={classNames({ hidden: !addOrEdit })}
-        >
+      <Card.Footer
+        className={classNames("p-4 flex flex-row-reverse", {
+          hidden: !addOrEdit,
+        })}
+      >
+        <Button form="member-form" type="submit">
           Save Member
         </Button>
-        <Button
-          className={classNames({ hidden: !addOrEdit })}
-          color="gray"
-          onClick={() => dispatch({ type: actions.CANCEL })}
-        >
+        <Button color="gray" onClick={() => dispatch({ type: actions.CANCEL })}>
           Cancel
         </Button>
       </Card.Footer>

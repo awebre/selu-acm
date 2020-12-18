@@ -50,7 +50,6 @@ export default function OfficerCrudCard({ isReadOnly, isVisible }) {
       <Card.Footer className="p-4 flex flex-row-reverse">
         {mode === modes.read && (
           <Button
-            className="rounded"
             onClick={() => dispatch({ type: actions.ADD_NEW_OFFICER })}
             disabled={isReadOnly}
           >
@@ -60,17 +59,11 @@ export default function OfficerCrudCard({ isReadOnly, isVisible }) {
         {(mode === modes.update || mode === modes.create) && (
           <>
             {!isReadOnly && (
-              <Button
-                form="officer-form"
-                className="rounded"
-                type="submit"
-                disabled={isReadOnly}
-              >
+              <Button form="officer-form" type="submit" disabled={isReadOnly}>
                 Save Officer
               </Button>
             )}
             <Button
-              className="rounded"
               color="gray"
               onClick={() => dispatch({ type: actions.CANCEL })}
             >

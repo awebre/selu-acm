@@ -5,12 +5,14 @@ export default function Button({
   color = "blue",
   className,
   margin = "m-2",
+  rounded = true,
   ...props
 }) {
   return (
     <button
       className={classNames(
         className,
+        { rounded: rounded },
         `disabled:opacity-50 disabled:bg-${color}-500 bg-${color}-500 hover:bg-${color}-700 text-white font-bold py-2 px-4 shadow ${margin}`
       )}
       {...props}

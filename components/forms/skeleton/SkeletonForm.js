@@ -8,7 +8,7 @@ function FormGroup({ type = "input" }) {
       {type === "input" && (
         <>
           <div className="col-span-3 bg-gray-300 p-4 rounded animate-pulse"></div>
-          <div className="col-span-6 bg-gray-100 p-5 mb-2 rouned animate-pulse"></div>
+          <div className="col-span-6 bg-gray-100 p-5 mb-2 rounded animate-pulse"></div>
         </>
       )}
       {type === "checkbox" && (

@@ -69,16 +69,14 @@ function Drawer() {
       <Button
         color="gray"
         margin="m-0"
-        className="absolute -top-10 right-3 rounded rounded-b-none bg-gray-100 shadow-inner"
+        className="absolute -top-10 right-3 rounded-b-none bg-gray-100 shadow-inner"
         onClick={() => setDrawerOpen(!isDrawerOpen)}
       >
         <i className="fas fa-chevron-down"></i>
       </Button>
       {!session && (
         <>
-          <Button className="rounded" onClick={signIn}>
-            Officer Sign In
-          </Button>
+          <Button onClick={signIn}>Officer Sign In</Button>
         </>
       )}
       {session && (
@@ -99,7 +97,7 @@ function Drawer() {
       <Button
         color="gray"
         margin="m-0"
-        className="absolute bottom-0 right-3 rounded rounded-b-none bg-gray-100 shadow-inner"
+        className="absolute bottom-0 right-3 rounded-b-none bg-gray-100 shadow-inner"
         onClick={() => setDrawerOpen(!isDrawerOpen)}
       >
         <i className="fas fa-chevron-up"></i>
