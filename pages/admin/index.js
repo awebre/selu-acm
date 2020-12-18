@@ -19,7 +19,7 @@ export default function Admin({ isReadOnly }) {
           isActive={activeCard === cards.Members}
           setActive={() => setActiveCard(cards.Members)}
         >
-          Members
+          Find a Member
         </PillNav.Pill>
         <PillNav.Pill
           isActive={activeCard === cards.Officers}
