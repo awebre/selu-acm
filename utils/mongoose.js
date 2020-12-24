@@ -16,6 +16,11 @@ if (!MONGODB_DB) {
 //Would like a better place for this side effect to occur
 mongoose.ObjectId.get((v) => v?.toString());
 
+// Uncomment the below to see what queries mongoose is running
+// mongoose.set("debug", (collectionName, method, query, doc) => {
+//   console.log(`${collectionName}.${method}`, JSON.stringify(query), doc);
+// });
+
 const connection = {}; /* creating connection object*/
 
 async function dbConnect() {

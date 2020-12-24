@@ -2,12 +2,18 @@ import { useState } from "react";
 import classNames from "classnames";
 import { getSessionUser } from "utils/authn";
 import { canUpdateOfficers } from "utils/permissions";
-import { AdminLayout, OfficersCard, MembersCard } from "components/admin/";
+import {
+  AdminLayout,
+  OfficersCard,
+  MembersCard,
+  TreasuryCard,
+} from "components/admin/";
 import { PillNav } from "components";
 
 const cards = {
   Officers: "Officers",
   Members: "Members",
+  Treasury: "Treasury",
 };
 
 export default function Admin({ isReadOnly }) {
@@ -27,12 +33,19 @@ export default function Admin({ isReadOnly }) {
         >
           Officers
         </PillNav.Pill>
+        <PillNav.Pill
+          isActive={activeCard === cards.Treasury}
+          setActive={() => setActiveCard(cards.Treasury)}
+        >
+          Treasury
+        </PillNav.Pill>
       </PillNav>
       <OfficersCard
         isReadOnly={isReadOnly}
         isVisible={activeCard === cards.Officers}
       />
       <MembersCard isVisible={activeCard === cards.Members} />
+      <TreasuryCard isVisible={activeCard === cards.Treasury} />
     </AdminLayout>
   );
 }

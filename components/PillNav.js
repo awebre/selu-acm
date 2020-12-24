@@ -5,7 +5,7 @@ function PillNav({ children, className }) {
     <ul
       className={classNames(
         className,
-        "flex flex-1 p-2 flex-row justify-start items-start m-2"
+        "flex flex-1 p-2 flex-row justify-start items-start m-2 flex-wrap"
       )}
     >
       {children}

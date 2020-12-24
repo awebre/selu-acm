@@ -34,4 +34,14 @@ function canUpdateMembers(user) {
   return isAdminOrOfficer(user);
 }
 
-export { canReadOfficers, canUpdateOfficers, canReadMembers, canUpdateMembers };
+function canViewTreasuryLog(user) {
+  return isAdminOrOfficer(user);
+}
+
+export {
+  canReadOfficers,
+  canUpdateOfficers,
+  canReadMembers,
+  canUpdateMembers,
+  canViewTreasuryLog,
+};
