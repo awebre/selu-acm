@@ -11,15 +11,15 @@ async function getLogByYear(year) {
 async function get(req, res) {
   try {
     const log = await getLogByYear(req.query.year);
-    const transactions = log.transactions.map((t) => ({
+    const transactions = log?.transactions?.map((t) => ({
       _id: t._id,
       date: t.date,
       amount: t.amount.toString(),
       description: t.description,
     }));
     const dto = {
-      _id: log._id,
-      balance: log.getBalance(),
+      _id: log?._id,
+      balance: log?.getBalance(),
       transactions: transactions,
     };
     res.json(dto);

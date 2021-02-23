@@ -23,10 +23,10 @@ const options = {
         role: { $in: officerRoles },
       });
       if (!userRoles) {
-        return Promise.reject("/errors/officerLogin");
+        return false;
       }
 
-      return Promise.resolve("/admin");
+      return true;
     },
   },
   // A database is optional, but required to persist accounts in a database

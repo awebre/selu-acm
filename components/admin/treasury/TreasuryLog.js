@@ -17,7 +17,7 @@ export default function TreasuryLog() {
         year={year}
         onChange={(y) => setYear(y)}
       />
-      {!isLoading && log && log.transactions.map((t) => <div>{t.amount}</div>)}
+      {!isLoading && log?.transactions?.map((t) => <div>{t.amount}</div>)}
     </>
   );
 }

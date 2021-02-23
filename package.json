@@ -9,30 +9,30 @@
     "seed": "node seed.js"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^5.15.1",
-    "axios": "^0.21.0",
+    "@fortawesome/fontawesome-free": "^5.15.2",
+    "axios": "^0.21.1",
     "big.js": "^6.0.3",
     "classnames": "^2.2.6",
-    "dayjs": "^1.9.6",
+    "dayjs": "^1.10.4",
     "dotenv": "^8.2.0",
     "mongo-seeding": "^3.5.0",
-    "mongodb": "^3.6.0",
-    "mongoose": "^5.10.15",
-    "next": "latest",
-    "next-auth": "^3.1.0",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-hook-form": "^6.11.4",
-    "swr": "^0.3.9"
+    "mongodb": "^3.6.4",
+    "mongoose": "^5.11.17",
+    "next": "^10.0.7",
+    "next-auth": "^3.5.0",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-hook-form": "^6.15.4",
+    "swr": "^0.4.2"
   },
   "peerOptionalDependencies": {
     "mongodb": "^3.6.0"
   },
   "license": "MIT",
   "devDependencies": {
-    "autoprefixer": "^10.0.2",
-    "postcss": "^8.1.8",
+    "autoprefixer": "^10.2.4",
+    "postcss": "^8.2.6",
     "postcss-preset-env": "^6.7.0",
-    "tailwindcss": "^2.0.1"
+    "tailwindcss": "^2.0.3"
   }
 }
