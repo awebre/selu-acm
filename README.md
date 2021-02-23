@@ -1,3 +1,6 @@
+# Proof of Concept
+This repository is a proof of concept created for personal purposes and is not officialy sanctioned (or used by) the ACM or its Officers. My primary goal in creating this was to take real requirements and attempt to create something using a framework I was completely unfamiliar with (NextJs/MongoDb). All of those disclaimers aside, I would be happy to make this available for SELU's ACM and would love to see this someday be a living Open Source project contributed to by SELU's student body.
+
 ## Configuration
 
 ### Set up a MongoDB database
